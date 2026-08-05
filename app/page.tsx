@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { useSpeechRecognition } from "@/lib/useSpeechRecognition";
 
 type Role = "user" | "assistant";
 type Message = { role: Role; content: string };
@@ -32,6 +33,10 @@ export default function Page() {
   const [summary, setSummary] = useState<Summary | null>(null);
   const [match, setMatch] = useState<{ coach: Coach; reasoning: string } | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
+
+  const speech = useSpeechRecognition((finalChunk) => {
+    setInput((prev) => (prev ? `${prev} ${finalChunk}` : finalChunk));
+  });
 
   useEffect(() => {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
@@ -115,6 +120,7 @@ export default function Page() {
           onSend={sendAnswer}
           matching={stage === "matching"}
           scrollRef={scrollRef}
+          speech={speech}
         />
       )}
 
@@ -159,6 +165,7 @@ function ChatScreen({
   onSend,
   matching,
   scrollRef,
+  speech,
 }: {
   messages: Message[];
   loading: boolean;
@@ -167,6 +174,13 @@ function ChatScreen({
   onSend: () => void;
   matching: boolean;
   scrollRef: React.RefObject<HTMLDivElement>;
+  speech: {
+    supported: boolean;
+    listening: boolean;
+    interim: string;
+    start: () => void;
+    stop: () => void;
+  };
 }) {
   return (
     <>
@@ -191,26 +205,53 @@ function ChatScreen({
         )}
       </div>
       {!matching && (
-        <div style={{ display: "flex", gap: "0.5rem" }}>
-          <input
-            type="text"
-            value={input}
-            placeholder="Type your answer..."
-            onChange={(e) => setInput(e.target.value)}
-            onKeyDown={(e) => {
-              if (e.key === "Enter" && !loading) onSend();
-            }}
-            disabled={loading}
-          />
-          <button
-            className="primary"
-            style={{ width: "auto", padding: "0.75rem 1.1rem" }}
-            onClick={onSend}
-            disabled={loading || !input.trim()}
-          >
-            Send
-          </button>
-        </div>
+        <>
+          {speech.listening && (
+            <p className="subtle" style={{ margin: "0 0 0.4rem", fontStyle: "italic" }}>
+              {speech.interim || "Listening..."}
+            </p>
+          )}
+          <div style={{ display: "flex", gap: "0.5rem" }}>
+            <input
+              type="text"
+              value={input}
+              placeholder={speech.listening ? "Listening..." : "Type or tap the mic to speak..."}
+              onChange={(e) => setInput(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" && !loading) onSend();
+              }}
+              disabled={loading}
+            />
+            {speech.supported && (
+              <button
+                type="button"
+                aria-label={speech.listening ? "Stop recording" : "Speak your answer"}
+                onClick={() => (speech.listening ? speech.stop() : speech.start())}
+                disabled={loading}
+                style={{
+                  width: "3rem",
+                  flex: "0 0 auto",
+                  border: "1px solid var(--line)",
+                  borderRadius: "8px",
+                  background: speech.listening ? "var(--accent-strong)" : "var(--paper-raised)",
+                  color: speech.listening ? "var(--paper)" : "var(--ink)",
+                  fontSize: "1.15rem",
+                  cursor: loading ? "default" : "pointer",
+                }}
+              >
+                {speech.listening ? "■" : "🎤"}
+              </button>
+            )}
+            <button
+              className="primary"
+              style={{ width: "auto", padding: "0.75rem 1.1rem" }}
+              onClick={onSend}
+              disabled={loading || !input.trim()}
+            >
+              Send
+            </button>
+          </div>
+        </>
       )}
     </>
   );
