@@ -1,0 +1,30 @@
+[
+  {
+    "id": "coach-maya",
+    "name": "Maya R.",
+    "focus": "Early childhood behaviour (ages 2-7): tantrums, sleep, sibling conflict, transitions",
+    "background": "12 years as a kindergarten teacher before coaching. Calm, structure-first approach.",
+    "goodFor": ["toddler or preschool behaviour", "sleep and routine struggles", "new sibling adjustment", "starting daycare or JK"]
+  },
+  {
+    "id": "coach-devon",
+    "name": "Devon L.",
+    "focus": "School-age and teen anxiety, school avoidance, and emotional regulation",
+    "background": "Former school counsellor, trained in CBT-informed coaching techniques for families.",
+    "goodFor": ["anxiety or worry", "school refusal or avoidance", "meltdowns around homework or performance", "social difficulties at school"]
+  },
+  {
+    "id": "coach-priya",
+    "name": "Priya S.",
+    "focus": "Education system navigation: IEPs, IPRCs, school meetings, advocating with a school board",
+    "background": "Former vice-principal, 15 years in the Ontario public system before coaching.",
+    "goodFor": ["IEP or special education process", "conflict with a school or teacher", "advocating in a school meeting", "understanding what support a child is entitled to"]
+  },
+  {
+    "id": "coach-renata",
+    "name": "Renata K.",
+    "focus": "Parent return-to-work transitions and family logistics after leave",
+    "background": "Career coach background, specializes in the practical and emotional side of going back to work.",
+    "goodFor": ["returning to work after parental leave", "childcare logistics and guilt", "rebuilding a routine as a family", "co-parenting the mental load"]
+  }
+]
