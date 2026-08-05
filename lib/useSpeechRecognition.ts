@@ -41,7 +41,10 @@ export function useSpeechRecognition(onFinalChunk: (text: string) => void) {
     setSupported(true);
 
     const recognition = new Impl();
-    recognition.continuous = false;
+    // continuous: true - do not auto-stop on a pause in speech. The user
+    // stops manually (mic button again, or Enter) so a thinking pause
+    // mid-answer doesn't cut them off.
+    recognition.continuous = true;
     recognition.interimResults = true;
     recognition.lang = "en-US";
 

@@ -208,7 +208,7 @@ function ChatScreen({
         <>
           {speech.listening && (
             <p className="subtle" style={{ margin: "0 0 0.4rem", fontStyle: "italic" }}>
-              {speech.interim || "Listening..."}
+              {speech.interim || "Listening... tap the mic or press Enter when done"}
             </p>
           )}
           <div style={{ display: "flex", gap: "0.5rem" }}>
@@ -218,7 +218,12 @@ function ChatScreen({
               placeholder={speech.listening ? "Listening..." : "Type or tap the mic to speak..."}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={(e) => {
-                if (e.key === "Enter" && !loading) onSend();
+                if (e.key !== "Enter") return;
+                if (speech.listening) {
+                  speech.stop();
+                } else if (!loading) {
+                  onSend();
+                }
               }}
               disabled={loading}
             />
