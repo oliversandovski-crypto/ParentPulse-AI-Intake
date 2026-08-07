@@ -2,23 +2,51 @@
   {
     "id": "coach-maya",
     "name": "Maya R.",
-    "focus": "Early childhood behaviour (ages 2-7): tantrums, sleep, sibling conflict, transitions",
+    "focus": "Early childhood behaviour and social-emotional development, ages 4 to 9",
     "background": "12 years as a kindergarten teacher before coaching. Calm, structure-first approach.",
-    "goodFor": ["toddler or preschool behaviour", "sleep and routine struggles", "new sibling adjustment", "starting daycare or JK"]
+    "goodFor": ["toddler or preschool behaviour", "sleep and routine struggles", "making friends or social skills at a young age", "self-regulation at home or school", "new sibling adjustment", "starting daycare or JK"]
   },
   {
     "id": "coach-devon",
     "name": "Devon L.",
-    "focus": "School-age and teen anxiety, school avoidance, and emotional regulation",
-    "background": "Former school counsellor, trained in CBT-informed coaching techniques for families.",
-    "goodFor": ["anxiety or worry", "school refusal or avoidance", "meltdowns around homework or performance", "social difficulties at school"]
+    "focus": "Pre-teen and teen social-emotional struggles: anxiety, defiance, school discipline, aggression",
+    "background": "Former school counsellor, trained in CBT-informed coaching techniques for families with kids 10 to 18.",
+    "goodFor": ["anxiety or worry in a pre-teen or teen", "school refusal or avoidance", "defiance or frequent arguing", "physical or verbal aggression", "school discipline issues", "trouble making or keeping friends as a teen"]
   },
   {
     "id": "coach-priya",
     "name": "Priya S.",
     "focus": "Education system navigation: IEPs, IPRCs, school meetings, advocating with a school board",
     "background": "Former vice-principal, 15 years in the Ontario public system before coaching.",
-    "goodFor": ["IEP or special education process", "conflict with a school or teacher", "advocating in a school meeting", "understanding what support a child is entitled to"]
+    "goodFor": ["IEP or special education process", "conflict with a school or teacher", "advocating in a school meeting", "understanding what support a child is entitled to", "curriculum concerns or academic achievement worries by age"]
+  },
+  {
+    "id": "coach-samir",
+    "name": "Samir A.",
+    "focus": "Coaching for families navigating a diagnosed or suspected learning difference",
+    "background": "Background in special education, works specifically with parents of kids with ADHD, learning disabilities, autism, or a language, hearing, or vision impairment.",
+    "goodFor": ["ADHD", "learning disability", "language impairment", "autism", "hearing impairment", "vision impairment", "reading difficulties at any age", "giftedness and asynchronous development"]
+  },
+  {
+    "id": "coach-elena",
+    "name": "Elena V.",
+    "focus": "Co-parenting and single parenting support",
+    "background": "Family mediation background, works with parents navigating shared custody, conflict over parenting styles, or parenting solo.",
+    "goodFor": ["conflict over parenting styles between co-parents", "improving the relationship with the other parent", "navigating parenting challenges alone", "building confidence as a single parent"]
+  },
+  {
+    "id": "coach-ruth",
+    "name": "Ruth D.",
+    "focus": "Support for grandparents and other relatives raising or co-raising a grandchild",
+    "background": "Works specifically with kinship caregivers, a different set of pressures than a parent's.",
+    "goodFor": ["primary caregiver for a grandchild", "managing parenting responsibilities later in life", "generational differences in parenting style", "a grandchild's emotional wellbeing"]
+  },
+  {
+    "id": "coach-amara",
+    "name": "Amara O.",
+    "focus": "Coaching for newcomer and immigrant families",
+    "background": "Works with parents adjusting to raising kids in a new country, including school systems and cultural navigation.",
+    "goodFor": ["adjusting to parenting in a new country", "a child's adaptation to a new school", "language or cultural barriers", "building a support network as a newcomer family"]
   },
   {
     "id": "coach-renata",
@@ -26,5 +54,12 @@
     "focus": "Parent return-to-work transitions and family logistics after leave",
     "background": "Career coach background, specializes in the practical and emotional side of going back to work.",
     "goodFor": ["returning to work after parental leave", "childcare logistics and guilt", "rebuilding a routine as a family", "co-parenting the mental load"]
+  },
+  {
+    "id": "coach-lena",
+    "name": "Lena F.",
+    "focus": "Mindfulness, stress, and burnout coaching for the parent, not the child",
+    "background": "Mindfulness-based stress reduction training, focused on the parent's own overwhelm rather than the child's behaviour.",
+    "goodFor": ["feeling overwhelmed or emotionally drained", "trouble staying patient and calm with a child", "difficulty being present with family", "trouble sleeping or relaxing due to stress", "balancing work and family responsibilities", "wanting self-care but not knowing where to start"]
   }
 ]
