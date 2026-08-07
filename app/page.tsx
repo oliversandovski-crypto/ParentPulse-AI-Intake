@@ -39,6 +39,26 @@ export default function Page() {
     setInput((prev) => (prev ? `${prev} ${finalChunk}` : finalChunk));
   });
 
+  // Stopping the recognizer doesn't guarantee the last spoken chunk has
+  // landed in `input` yet - the browser can fire one more onresult after
+  // stop() is called, before onend. So "stop and send" is two steps: mark
+  // intent, then actually send once `listening` truly flips to false (which
+  // only happens after that final onresult has already been applied).
+  const sendOnStopRef = useRef(false);
+
+  function stopAndSend() {
+    sendOnStopRef.current = true;
+    speech.stop();
+  }
+
+  useEffect(() => {
+    if (!speech.listening && sendOnStopRef.current) {
+      sendOnStopRef.current = false;
+      sendAnswer();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [speech.listening]);
+
   useEffect(() => {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
   }, [messages, loading]);
@@ -122,6 +142,7 @@ export default function Page() {
           matching={stage === "matching"}
           scrollRef={scrollRef}
           speech={speech}
+          onStopAndSend={stopAndSend}
         />
       )}
 
@@ -170,6 +191,7 @@ function ChatScreen({
   matching,
   scrollRef,
   speech,
+  onStopAndSend,
 }: {
   messages: Message[];
   loading: boolean;
@@ -185,6 +207,7 @@ function ChatScreen({
     start: () => void;
     stop: () => void;
   };
+  onStopAndSend: () => void;
 }) {
   return (
     <>
@@ -212,7 +235,7 @@ function ChatScreen({
         <>
           {speech.listening && (
             <p className="subtle" style={{ margin: "0 0 0.4rem", fontStyle: "italic" }}>
-              {speech.interim || "Listening... tap the mic or press Enter when done"}
+              {speech.interim || "Listening... tap the mic or press Enter to send"}
             </p>
           )}
           <div style={{ display: "flex", gap: "0.5rem" }}>
@@ -224,7 +247,7 @@ function ChatScreen({
               onKeyDown={(e) => {
                 if (e.key !== "Enter") return;
                 if (speech.listening) {
-                  speech.stop();
+                  onStopAndSend();
                 } else if (!loading) {
                   onSend();
                 }
@@ -234,8 +257,8 @@ function ChatScreen({
             {speech.supported && (
               <button
                 type="button"
-                aria-label={speech.listening ? "Stop recording" : "Speak your answer"}
-                onClick={() => (speech.listening ? speech.stop() : speech.start())}
+                aria-label={speech.listening ? "Stop and send" : "Speak your answer"}
+                onClick={() => (speech.listening ? onStopAndSend() : speech.start())}
                 disabled={loading}
                 style={{
                   width: "3rem",
