@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
 import { useSpeechRecognition } from "@/lib/useSpeechRecognition";
 
 type Role = "user" | "assistant";
@@ -153,6 +154,9 @@ function IntroScreen({ onBegin }: { onBegin: () => void }) {
       <button className="primary" onClick={onBegin} style={{ marginTop: "0.5rem" }}>
         Begin
       </button>
+      <p className="subtle" style={{ marginTop: "0.9rem", textAlign: "center" }}>
+        <Link href="/legacy">See the current tool this replaces &rarr;</Link>
+      </p>
     </div>
   );
 }
